@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMANAH COMPUTAMA & PHOTOCOPY — Member App</title>
+    <title>IPS STORE — Member App</title>
     <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-        body, html {
+        body,
+        html {
             height: 100%;
             width: 100%;
             overflow: hidden;
@@ -37,9 +45,17 @@
             gap: 20px;
             transition: opacity 0.7s ease;
         }
-        #overlay.fade-out { opacity: 0; pointer-events: none; }
 
-        .ov-logo { font-size: 3rem; line-height: 1; }
+        #overlay.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .ov-logo {
+            font-size: 3rem;
+            line-height: 1;
+        }
+
         .ov-title {
             font-size: 1.1rem;
             font-weight: 800;
@@ -47,9 +63,10 @@
             text-align: center;
             letter-spacing: 0.02em;
         }
+
         .ov-sub {
             font-size: 0.75rem;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
             text-align: center;
         }
 
@@ -57,21 +74,22 @@
         .progress-wrap {
             width: 200px;
             height: 4px;
-            background: rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.12);
             border-radius: 999px;
             overflow: hidden;
         }
+
         .progress-bar {
             height: 100%;
             width: 0%;
             border-radius: 999px;
-            background: linear-gradient(90deg, #2563eb, #dc2626);
+            background: linear-gradient(90deg, #4f46e5, #6366f1);
             transition: width 0.4s ease;
         }
 
         .ov-status {
             font-size: 0.78rem;
-            color: rgba(255,255,255,0.55);
+            color: rgba(255, 255, 255, 0.55);
             text-align: center;
             min-height: 18px;
         }
@@ -82,19 +100,39 @@
             flex-direction: column;
             align-items: center;
             gap: 14px;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 16px;
             padding: 24px 28px;
             text-align: center;
             max-width: 300px;
         }
-        .err-icon { font-size: 2.2rem; }
-        .err-title { font-size: 0.95rem; font-weight: 700; color: #fca5a5; }
-        .err-msg { font-size: 0.75rem; color: rgba(255,255,255,0.45); line-height: 1.5; }
-        .btn-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
 
-        .btn-retry, .btn-open {
+        .err-icon {
+            font-size: 2.2rem;
+        }
+
+        .err-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fca5a5;
+        }
+
+        .err-msg {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.45);
+            line-height: 1.5;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-retry,
+        .btn-open {
             padding: 9px 20px;
             border-radius: 10px;
             font-size: 0.8rem;
@@ -103,26 +141,33 @@
             border: none;
             transition: opacity 0.2s;
         }
-        .btn-retry:hover, .btn-open:hover { opacity: 0.85; }
+
+        .btn-retry:hover,
+        .btn-open:hover {
+            opacity: 0.85;
+        }
+
         .btn-retry {
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            background: linear-gradient(135deg, #4f46e5, #3730a3);
             color: white;
         }
+
         .btn-open {
-            background: rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.12);
             color: white;
-            border: 1px solid rgba(255,255,255,0.25);
+            border: 1px solid rgba(255, 255, 255, 0.25);
         }
     </style>
 </head>
+
 <body>
 
     <!-- Overlay Loading -->
     <div id="overlay">
         <div class="ov-logo">📱</div>
         <div>
-            <div class="ov-title">AMANAH COMPUTAMA</div>
-            <div class="ov-sub">& PHOTOCOPY — Member App</div>
+            <div class="ov-title">IPS STORE</div>
+            <div class="ov-sub">Member App</div>
         </div>
         <div class="progress-wrap">
             <div class="progress-bar" id="prog"></div>
@@ -133,7 +178,8 @@
         <div id="error-box">
             <div class="err-icon">⚠️</div>
             <div class="err-title">Gagal memuat aplikasi</div>
-            <div class="err-msg">Server lambat atau koneksi bermasalah.<br>Coba lagi atau buka langsung di tab baru.</div>
+            <div class="err-msg">Server lambat atau koneksi bermasalah.<br>Coba lagi atau buka langsung di tab baru.
+            </div>
             <div class="btn-row">
                 <button class="btn-retry" onclick="retryLoad()">🔄 Coba Lagi</button>
                 <button class="btn-open" onclick="openDirect()">↗ Buka Langsung</button>
@@ -142,20 +188,18 @@
     </div>
 
     <!-- Iframe GAS -->
-    <iframe
-        id="app-frame"
+    <iframe id="app-frame"
         src="https://script.google.com/macros/s/AKfycbzz2Y4zPPo7pzMSJq0aE9dC5Nvifzl_NRKm7kNlXTYvkhLeK-fBfpZdkF_t4Pcz3f8/exec"
-        allow="geolocation; microphone; camera; clipboard-read; clipboard-write; encrypted-media;"
-    ></iframe>
+        allow="geolocation; microphone; camera; clipboard-read; clipboard-write; encrypted-media;"></iframe>
 
     <script>
         const GAS_URL = "https://script.google.com/macros/s/AKfycbzz2Y4zPPo7pzMSJq0aE9dC5Nvifzl_NRKm7kNlXTYvkhLeK-fBfpZdkF_t4Pcz3f8/exec";
 
-        const iframe    = document.getElementById('app-frame');
-        const overlay   = document.getElementById('overlay');
-        const prog      = document.getElementById('prog');
+        const iframe = document.getElementById('app-frame');
+        const overlay = document.getElementById('overlay');
+        const prog = document.getElementById('prog');
         const statusTxt = document.getElementById('status-text');
-        const errorBox  = document.getElementById('error-box');
+        const errorBox = document.getElementById('error-box');
 
         let loaded = false;
         let progVal = 0;
@@ -176,10 +220,10 @@
         // Update teks status berdasarkan progres
         function updateStatusMsg() {
             if (loaded) return;
-            if (progVal < 30)      statusTxt.textContent = 'Menyiapkan aplikasi...';
+            if (progVal < 30) statusTxt.textContent = 'Menyiapkan aplikasi...';
             else if (progVal < 60) statusTxt.textContent = 'Menghubungi server...';
             else if (progVal < 85) statusTxt.textContent = 'Memuat data...';
-            else                   statusTxt.textContent = 'Hampir siap...';
+            else statusTxt.textContent = 'Hampir siap...';
         }
         setInterval(updateStatusMsg, 800);
 
@@ -228,4 +272,5 @@
         startProgress();
     </script>
 </body>
+
 </html>
